@@ -2,10 +2,8 @@ package com.devchris.person.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,11 +28,12 @@ public class Person {
     private String hobby;
     private String bloodType;
     private String address;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private String job;
     private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private Block block;
 
 }

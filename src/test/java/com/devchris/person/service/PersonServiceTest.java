@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.w3c.dom.ls.LSOutput;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,17 +31,23 @@ class PersonServiceTest {
     @Test
     void getPeopleExcludeBlocks() {
         givenPeople();
-        givenBlocks();
 
         List<Person> result = personService.getPeopleExcludeBlocks();
         result.forEach(System.out::println);
     }
 
-    private void givenBlocks() {
-        givenBlock("martin");
+    @Test
+    void getPeopleByName() {
+        givenPeople();
+
+        List<Person> result = personService.getPeopleByName("martin");
+        result.forEach(System.out::println);
     }
-    private void givenBlock(String name) {
-        blockReposiroty.save(new Block(name));
+
+    @Test
+    void getPerson() {
+        givenPeople();
+        Person person = personService.getPerson(3L);
     }
 
     private void givenPeople() {
